@@ -1,27 +1,26 @@
 import React from 'react';
-import './App.scss';
+import { TodoApp } from './components/TodoApp';
+import { TodoList } from './components/TodoList';
+import { TodoProvider } from './TodoContext';
+import { TodosFilter } from './components/TodosFilter';
 
-interface Props {
-  onClick: () => void;
-}
-
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
-
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
-    </div>
+    <TodoProvider>
+      <section className="todoapp">
+        <header className="header">
+          <h1>todos</h1>
+          <TodoApp />
+        </header>
+
+        <section className="main">
+          <TodoList />
+        </section>
+
+        <TodosFilter />
+      </section>
+    </TodoProvider>
   );
 };
+
+export default App;
